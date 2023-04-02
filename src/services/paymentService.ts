@@ -17,3 +17,7 @@ export const create = async (paymentRequest: PaymentRequest): Promise<Payment> =
 
   return await paymentRepo.create(paymentToStore);
 };
+
+export const getAll = async () => {
+  return await paymentRepo.getAll();
+};

@@ -37,6 +37,10 @@ describe("Payment Service", () => {
         date: "2023-04-02T17:45:54.772Z",
       },
     ];
+
+    const createMock = jest.spyOn(paymentRepo, "getAll");
+    createMock.mockResolvedValue(payments);
+
     const result = await paymentService.getAll();
 
     expect(result).toStrictEqual(payments);
