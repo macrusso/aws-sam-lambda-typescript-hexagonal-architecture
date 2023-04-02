@@ -14,6 +14,11 @@ export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response
     }
 
     const body = JSON.parse(event.body || "{}") as PaymentRequest;
+
+    if (Object.keys(body).length === 0) {
+      throw new Error(`Empty payment body`);
+    }
+
     const result = await paymentService.create(body);
 
     return {
