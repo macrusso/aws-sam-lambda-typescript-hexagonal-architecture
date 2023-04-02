@@ -17,7 +17,7 @@ export const create = async (item: Payment): Promise<Payment> => {
 export const getAll = async (): Promise<Payment[]> => {
   const result = await PaymentEntity.scan();
 
-  if (result.Items?.length) return [];
+  if (!result.Items?.length) return [];
 
   return result.Items as Payment[];
 };
