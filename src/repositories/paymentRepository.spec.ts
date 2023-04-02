@@ -32,6 +32,10 @@ describe("Payment Repository", () => {
         date: "2023-04-02T17:45:54.772Z",
       },
     ];
+    const createMock = jest.spyOn(PaymentEntity, "scan");
+    createMock.mockResolvedValue({
+      Items: payments,
+    });
 
     const result = await paymentRepo.getAll();
 
