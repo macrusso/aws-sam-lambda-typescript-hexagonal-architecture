@@ -3,7 +3,7 @@ import { Payment } from "../models/types";
 import * as paymentRepo from "./paymentRepository";
 
 describe("Payment Repository", () => {
-  it("DB is called with required payload", async () => {
+  it("Puts payment successfully", async () => {
     const payment: Payment = {
       sender: "sender",
       recipient: "recipient",
@@ -19,5 +19,22 @@ describe("Payment Repository", () => {
 
     expect(createMock).toBeCalledWith(payment);
     expect(result).toStrictEqual(payment);
+  });
+
+  it("Gets all payments", async () => {
+    const payments: Payment[] = [
+      {
+        sender: "sender",
+        recipient: "recipient",
+        amount: 100,
+        currency: "GBP",
+        id: "some_id",
+        date: "2023-04-02T17:45:54.772Z",
+      },
+    ];
+
+    const result = await paymentRepo.getAll();
+
+    expect(result).toStrictEqual(payments);
   });
 });
