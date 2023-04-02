@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { postPayment } from "./app";
+import { getPayments, postPayment } from "./app";
 import { Payment } from "./models/types";
 import * as paymentService from "./services/paymentService";
 
@@ -36,6 +36,10 @@ describe("App Handlers", () => {
   });
 
   it("Returns stringified results on get payments", async () => {
+    const payload = {
+      httpMethod: "GET",
+    } as any as APIGatewayProxyEvent;
+
     const payments: Payment[] = [
       {
         sender: "sender",
@@ -47,7 +51,10 @@ describe("App Handlers", () => {
       },
     ];
 
-    const result = await getPayments();
+    const createMock = jest.spyOn(paymentService, "getAll");
+    createMock.mockResolvedValue(payments);
+
+    const result = await getPayments(payload);
 
     expect(result).toStrictEqual({
       statusCode: 200,

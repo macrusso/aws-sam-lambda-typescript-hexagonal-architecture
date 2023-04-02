@@ -34,3 +34,30 @@ export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response
     }
   }
 };
+
+export const getPayments = async (event: APIGatewayProxyEvent): Promise<Response> => {
+  try {
+    if (event.httpMethod !== "GET") {
+      throw new Error(`Only accepts GET method, you tried: ${event.httpMethod} method.`);
+    }
+
+    const result = await paymentService.getAll();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
+  } catch (error: any) {
+    if (error.statusCode) {
+      return {
+        statusCode: error.statusCode,
+        body: error.message,
+      };
+    } else {
+      return {
+        statusCode: 500,
+        body: error.message,
+      };
+    }
+  }
+};
