@@ -12,9 +12,12 @@ describe("Payment Repository", () => {
       id: "some_id",
       date: "2023-04-02T17:45:54.772Z",
     };
+    const createMock = jest.spyOn(PaymentEntity, "put");
+    createMock.mockResolvedValue({});
 
     const result = await paymentRepo.create(payment);
 
+    expect(createMock).toBeCalledWith(payment);
     expect(result).toStrictEqual(payment);
   });
 });
