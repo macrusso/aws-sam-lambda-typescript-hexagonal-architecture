@@ -37,4 +37,14 @@ describe("Payment Repository", () => {
 
     expect(result).toStrictEqual(payments);
   });
+
+  it("Returns empty array when no payments", async () => {
+    const createMock = jest.spyOn(PaymentEntity, "scan");
+    createMock.mockResolvedValue({});
+
+    const result = await paymentRepo.getAll();
+
+    expect(createMock).toBeCalled();
+    expect(result).toStrictEqual([]);
+  });
 });
