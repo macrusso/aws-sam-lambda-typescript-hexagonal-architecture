@@ -17,6 +17,8 @@ export const create = async (item: Payment): Promise<Payment> => {
 
 export const getAll = async (): Promise<Payment[]> => {
   console.log("paymentRepo getAll");
+  // TODO: add GSI of active payment or something like that
+  // to use query rather then scan for improved performance
   const result = await PaymentEntity.scan();
 
   if (!result.Items?.length) return [];
