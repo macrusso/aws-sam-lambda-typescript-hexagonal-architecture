@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { getPayments, postPayment } from "./app";
-import { Payment } from "./models/types";
-import * as paymentService from "./services/paymentService";
+import { getPayments, postPayment } from "./paymentHandler";
+import { Payment } from "../models/types";
+import * as paymentService from "../services/paymentService";
 
 describe("App Handlers", () => {
   describe("Post Payments", () => {

@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { PaymentRequest } from "./models/types";
-import * as paymentService from "./services/paymentService";
+import { PaymentRequest } from "../models/types";
+import * as paymentService from "../services/paymentService";
 
 interface Response {
   statusCode: number;

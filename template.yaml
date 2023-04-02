@@ -38,7 +38,7 @@ Resources:
   GetPaymentsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: app.getPayments
+      Handler: src/handlers/paymentHandler.getPayments
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref PaymentsTable
@@ -55,7 +55,7 @@ Resources:
   PostPaymentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: app.postPayment
+      Handler: src/handlers/paymentHandler.postPayment
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref PaymentsTable
