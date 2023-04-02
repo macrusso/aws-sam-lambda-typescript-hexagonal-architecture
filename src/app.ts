@@ -9,6 +9,7 @@ interface Response {
 
 export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response> => {
   try {
+    console.log("postPayment", event);
     if (event.httpMethod !== "POST") {
       throw new Error(`Only accepts POST method, you tried: ${event.httpMethod} method.`);
     }
@@ -26,6 +27,7 @@ export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response
       body: JSON.stringify(result),
     };
   } catch (error: any) {
+    console.log("postPayment error", error);
     if (error.statusCode) {
       return {
         statusCode: error.statusCode,
@@ -42,6 +44,7 @@ export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response
 
 export const getPayments = async (event: APIGatewayProxyEvent): Promise<Response> => {
   try {
+    console.log("getPayments", event);
     if (event.httpMethod !== "GET") {
       throw new Error(`Only accepts GET method, you tried: ${event.httpMethod} method.`);
     }
@@ -53,6 +56,7 @@ export const getPayments = async (event: APIGatewayProxyEvent): Promise<Response
       body: JSON.stringify(result),
     };
   } catch (error: any) {
+    console.log("getPayments error", error);
     if (error.statusCode) {
       return {
         statusCode: error.statusCode,

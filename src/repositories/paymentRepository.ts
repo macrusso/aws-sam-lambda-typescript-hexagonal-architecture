@@ -2,6 +2,7 @@ import { PaymentEntity } from "../models/payments";
 import { Payment } from "../models/types";
 
 export const create = async (item: Payment): Promise<Payment> => {
+  console.log("paymentRepo create", item);
   await PaymentEntity.put({
     id: item.id,
     sender: item.sender,
@@ -15,6 +16,7 @@ export const create = async (item: Payment): Promise<Payment> => {
 };
 
 export const getAll = async (): Promise<Payment[]> => {
+  console.log("paymentRepo getAll");
   const result = await PaymentEntity.scan();
 
   if (!result.Items?.length) return [];

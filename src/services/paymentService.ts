@@ -3,6 +3,7 @@ import * as paymentRepo from "../repositories/paymentRepository";
 import { v4 as uuidv4 } from "uuid";
 
 export const create = async (paymentRequest: PaymentRequest): Promise<Payment> => {
+  console.log("paymentService create", paymentRequest);
   const id = uuidv4();
   const date = new Date().toISOString();
 
@@ -19,5 +20,6 @@ export const create = async (paymentRequest: PaymentRequest): Promise<Payment> =
 };
 
 export const getAll = async () => {
+  console.log("paymentService getAll");
   return await paymentRepo.getAll();
 };
