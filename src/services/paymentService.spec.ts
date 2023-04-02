@@ -25,4 +25,20 @@ describe("Payment Service", () => {
     expect(result).toHaveProperty("id");
     expect(result).toHaveProperty("date");
   });
+
+  it("Returns all payments", async () => {
+    const payments: Payment[] = [
+      {
+        sender: "sender",
+        recipient: "recipient",
+        amount: 100,
+        currency: "GBP",
+        id: "some_id",
+        date: "2023-04-02T17:45:54.772Z",
+      },
+    ];
+    const result = await paymentService.getAll();
+
+    expect(result).toStrictEqual(payments);
+  });
 });
