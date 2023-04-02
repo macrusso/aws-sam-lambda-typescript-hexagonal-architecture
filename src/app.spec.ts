@@ -34,4 +34,23 @@ describe("App Handlers", () => {
       body: JSON.stringify(payment),
     });
   });
+
+  it("Throws when wrong httpMethod is used", async () => {
+    const payload = {
+      body: JSON.stringify({
+        sender: "sender",
+        recipient: "recipient",
+        amount: 100,
+        currency: "GBP",
+      }),
+      httpMethod: "GET",
+    } as any as APIGatewayProxyEvent;
+
+    const result = await postPayment(payload);
+
+    expect(result).toStrictEqual({
+      statusCode: 500,
+      body: `Only accepts POST method, you tried: GET method.`,
+    });
+  });
 });
