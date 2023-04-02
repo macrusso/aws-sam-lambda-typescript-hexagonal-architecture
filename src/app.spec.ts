@@ -35,6 +35,26 @@ describe("App Handlers", () => {
     });
   });
 
+  it("Returns stringified results on get payments", async () => {
+    const payments: Payment[] = [
+      {
+        sender: "sender",
+        recipient: "recipient",
+        amount: 100,
+        currency: "GBP",
+        id: "some_id",
+        date: "2023-04-02T17:45:54.772Z",
+      },
+    ];
+
+    const result = await getPayments();
+
+    expect(result).toStrictEqual({
+      statusCode: 200,
+      body: JSON.stringify(payments),
+    });
+  });
+
   it("Throws when wrong httpMethod is used", async () => {
     const payload = {
       body: JSON.stringify({
