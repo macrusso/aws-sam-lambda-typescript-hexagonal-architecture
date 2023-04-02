@@ -1,8 +1,12 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import { PaymentRequest } from "./models/types";
 import * as paymentService from "./services/paymentService";
+interface Response {
+  statusCode: number;
+  body: string;
+}
 
-export const postPayment = async (event: APIGatewayProxyEvent) => {
+export const postPayment = async (event: APIGatewayProxyEvent): Promise<Response> => {
   const body = JSON.parse(event.body || "{}") as PaymentRequest;
   const result = await paymentService.create(body);
 
