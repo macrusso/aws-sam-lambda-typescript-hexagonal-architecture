@@ -53,4 +53,29 @@ describe("App Handlers", () => {
       body: `Only accepts POST method, you tried: GET method.`,
     });
   });
+
+  it("Throws when service errors out", async () => {
+    const payload = {
+      body: JSON.stringify({
+        sender: "sender",
+        recipient: "recipient",
+        amount: 100,
+        currency: "GBP",
+      }),
+      httpMethod: "POST",
+    } as any as APIGatewayProxyEvent;
+
+    const createMock = jest.spyOn(paymentService, "create");
+    createMock.mockRejectedValue({
+      statusCode: 400,
+      message: "Bad Request",
+    });
+
+    const result = await postPayment(payload);
+
+    expect(result).toStrictEqual({
+      statusCode: 400,
+      body: `Bad Request`,
+    });
+  });
 });
