@@ -36,6 +36,19 @@ describe("App Handlers", () => {
       });
     });
 
+    it("Throws when empty no body is provided", async () => {
+      const payload = {
+        httpMethod: "POST",
+      } as any as APIGatewayProxyEvent;
+
+      const result = await postPayment(payload);
+
+      expect(result).toStrictEqual({
+        statusCode: 500,
+        body: `Empty payment body`,
+      });
+    });
+
     it("Throws when wrong httpMethod is used", async () => {
       const payload = {
         body: JSON.stringify({
