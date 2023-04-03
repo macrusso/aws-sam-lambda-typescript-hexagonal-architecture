@@ -57,7 +57,7 @@ Resources:
     Properties:
       Handler: src/handlers/paymentHandler.postPayment
       Policies:
-        - DynamoDBReadPolicy:
+        - DynamoDBWritePolicy:
             TableName: !Ref PaymentsTable
       Environment:
         Variables:
