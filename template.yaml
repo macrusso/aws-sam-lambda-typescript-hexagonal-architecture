@@ -6,7 +6,6 @@ Parameters:
 Globals:
   Function:
     Timeout: 5
-    Runtime: nodejs18.x
     MemorySize: 512
 
 Resources:
@@ -17,7 +16,7 @@ Resources:
         ResourcePath: "/*"
         HttpMethod: "*"
     Properties:
-      Stage Name: test
+      StageName: test
       Cors:
         AllowMethods: "'*'"
         AllowHeaders: "'*'"
@@ -38,7 +37,9 @@ Resources:
   GetPaymentsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/paymentHandler.getPayments
+      CodeUri: ./dist
+      Handler: handlers/paymentHandler.getPayments
+      Runtime: nodejs18.x
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref PaymentsTable
@@ -55,7 +56,9 @@ Resources:
   PostPaymentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/paymentHandler.postPayment
+      CodeUri: ./dist
+      Handler: handlers/paymentHandler.postPayment
+      Runtime: nodejs18.x
       Policies:
         - DynamoDBWritePolicy:
             TableName: !Ref PaymentsTable
