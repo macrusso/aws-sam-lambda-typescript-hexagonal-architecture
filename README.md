@@ -6,19 +6,41 @@ Hexagonal Architecture is to design the application in layers, with the core bus
 
 ## Usage
 
-Installation:
+### Installation:
 
 ```bash
 npm install
 ```
 
-Test:
+### Run locally:
+
+- install [Docker](https://docs.docker.com/desktop/install/mac-install/)
+- install [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+- compile TypeScript
+
+```bash
+npm run build
+```
+
+- build AWS SAM application
+
+```bash
+sam build
+```
+
+- run AWS SAM application locally
+
+```bash
+sam local start-api
+```
+
+### Test:
 
 ```bash
 npm run test
 ```
 
-Coverage:
+### Coverage:
 
 ```bash
 npm run coverage
